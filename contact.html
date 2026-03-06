@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ — ことりの巣</title>
+<meta name="description" content="ことりの巣へのお問い合わせページ。仙台の個人店舗・飲食店のWeb制作についてお気軽にご相談ください。">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #fdfaf5;
+    --brown: #6b4f3a;
+    --light-brown: #a07855;
+    --sage: #8a9e7b;
+    --text: #3d2e22;
+    --text-light: #8b7355;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--warm-white);
+    color: var(--text);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    color-scheme: light;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+  }
+
+  .deco-line {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100vh;
+    background: linear-gradient(to bottom, var(--sage), var(--light-brown), transparent);
+    opacity: 0.2;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  /* ―― ヘッダー ―― */
+  header {
+    padding: 60px 48px 20px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .bird-logo { width: 48px; height: 48px; }
+
+  .site-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--brown);
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-top: 6px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--brown); }
+
+  .divider {
+    max-width: 860px;
+    height: 1px;
+    background: var(--light-brown);
+    margin: 24px auto 56px;
+    opacity: 0.3;
+    width: calc(100% - 96px);
+  }
+
+  /* ―― メインコンテンツ ―― */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  /* 左カラム：テキスト */
+  .contact-intro {}
+
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.4;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+
+  .contact-heading em {
+    font-style: italic;
+    display: block;
+  }
+
+  .contact-desc {
+    font-size: 0.82rem;
+    line-height: 2;
+    color: var(--text-light);
+    letter-spacing: 0.06em;
+    margin-bottom: 40px;
+  }
+
+  .price-list {
+    list-style: none;
+    border-top: 1px solid rgba(160, 120, 85, 0.2);
+  }
+
+  .price-item {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(160, 120, 85, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .price-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+  }
+
+  .price-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  /* 右カラム：フォーム */
+  .contact-form {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .form-group {
+    margin-bottom: 28px;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-label .required {
+    color: var(--sage);
+    margin-left: 4px;
+    font-size: 0.65rem;
+  }
+
+  .form-label .optional {
+    color: var(--text-light);
+    margin-left: 4px;
+    font-size: 0.65rem;
+    opacity: 0.6;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    background: var(--cream);
+    border: 1px solid rgba(160, 120, 85, 0.25);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    font-size: 0.88rem;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--light-brown);
+    box-shadow: 0 0 0 3px rgba(160, 120, 85, 0.1);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.8;
+  }
+
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b7355' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--brown);
+    color: var(--cream);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: 0.25em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    background: var(--sage);
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  /* 送信完了メッセージ */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .success-msg.show { display: block; }
+
+  .success-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 20px;
+    color: var(--sage);
+  }
+
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--brown);
+    margin-bottom: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .success-desc {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+  }
+
+  /* フッター */
+  footer {
+    border-top: 1px solid rgba(160, 120, 85, 0.2);
+    padding: 32px 48px;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 680px) {
+    header { padding: 40px 24px 20px; }
+    .divider { width: calc(100% - 48px); }
+    main { padding: 0 24px 60px; grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deco-line"></div>
+
+<header>
+  <div class="logo-area">
+    <svg class="bird-logo" viewBox="0 0 100 100">
+      <path d="M 15 75 Q 50 95 85 70" fill="none" stroke="#a07855" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 35 65 C 30 45, 50 35, 60 45 C 65 40, 75 40, 70 50 C 75 55, 70 65, 60 65 C 50 70, 40 70, 35 65 Z" fill="#8a9e7b" opacity="0.9"/>
+      <circle cx="58" cy="48" r="1.5" fill="#f5f0e8"/>
+    </svg>
+    <a href="index.html" class="site-title">ことりの巣</a>
+  </div>
+  <a href="index.html" class="back-link">← Works に戻る</a>
+</header>
+
+<div class="divider"></div>
+
+<main>
+  <!-- 左：説明 -->
+  <div class="contact-intro">
+    <h1 class="contact-heading">
+      お気軽に<br>
+      <em>ご相談ください。</em>
+    </h1>
+    <p class="contact-desc">
+      仙台・宮城の飲食店・個人店舗向けに、<br>
+      Webサイト制作を承っています。<br>
+      まずはお気軽にご連絡ください。
+    </p>
+
+    <ul class="price-list">
+      <li class="price-item">
+        <span class="price-label">ベーシック</span>
+        <span class="price-value">¥30,000 〜</span>
+      </li>
+      <li class="price-item">
+        <span class="price-label">スタンダード</span>
+        <span class="price-value">¥50,000 〜</span>
+      </li>
+      <li class="price-item">
+        <span class="price-label">プレミアム</span>
+        <span class="price-value">¥80,000 〜</span>
+      </li>
+      <li class="price-item">
+        <span class="price-label">保守・更新</span>
+        <span class="price-value">¥5,000 / 月</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 右：フォーム -->
+  <div class="contact-form">
+    <form id="contactForm" action="https://formspree.io/f/xaqpwrjj" method="POST">
+
+      <div class="form-group">
+        <label class="form-label" for="name">
+          お名前<span class="required">必須</span>
+        </label>
+        <input type="text" id="name" name="name" placeholder="山田 花子" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="shop">
+          店舗名・業種<span class="required">必須</span>
+        </label>
+        <input type="text" id="shop" name="shop" placeholder="〇〇食堂 / 和食" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">
+          メールアドレス<span class="required">必須</span>
+        </label>
+        <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="budget">
+          希望予算帯<span class="optional">任意</span>
+        </label>
+        <select id="budget" name="budget">
+          <option value="">選択してください</option>
+          <option value="〜3万円">〜3万円（ベーシック）</option>
+          <option value="3〜5万円">3〜5万円（スタンダード）</option>
+          <option value="5〜8万円">5〜8万円（プレミアム）</option>
+          <option value="8万円〜">8万円〜（プレミアム以上）</option>
+          <option value="未定">未定・相談したい</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">
+          お問い合わせ内容<span class="required">必須</span>
+        </label>
+        <textarea id="message" name="message" placeholder="ご要望・ご質問などをお気軽にご記入ください。" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">送 信 す る</button>
+    </form>
+
+    <!-- 送信完了 -->
+    <div class="success-msg" id="successMsg">
+      <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 12l3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <p class="success-title">送信しました</p>
+      <p class="success-desc">
+        お問い合わせありがとうございます。<br>
+        数日以内にご連絡いたします。
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p class="footer-copy">© 2026 ことりの巣 — Sendai, Miyagi</p>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      successMsg.classList.add('show');
+    } else {
+      alert('送信に失敗しました。時間をおいて再度お試しください。');
+    }
+  });
+</script>
+
+</body>
+</html>
