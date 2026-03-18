@@ -80,6 +80,34 @@
     text-transform: uppercase;
   }
 
+  .quick-nav {
+    margin-top: 18px;
+    margin-left: 75px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .quick-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(160, 120, 85, 0.45);
+    color: var(--brown);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .quick-link:hover {
+    background: var(--brown);
+    color: var(--warm-white);
+    border-color: var(--brown);
+  }
+
   .divider {
     max-width: 1200px;
     height: 1px;
@@ -410,6 +438,7 @@
   @media (max-width: 600px) {
     header { padding: 40px 24px 20px; }
     .site-subtitle { margin-left: 0; margin-top: 15px; }
+    .quick-nav { margin-left: 0; }
     .gallery { padding: 0 24px 60px; gap: 20px; }
     .divider { width: calc(100% - 48px); }
     .hero { padding: 0 24px; grid-template-columns: 1fr; }
@@ -434,6 +463,10 @@
     <h1 class="site-title">ことりの巣</h1>
   </div>
   <p class="site-subtitle">だれにとっても、やさしい場所</p>
+  <nav class="quick-nav" aria-label="トップ導線">
+    <a href="./pricing.html" class="quick-link">料金プラン</a>
+    <a href="./contact.html" class="quick-link">お問い合わせ</a>
+  </nav>
 </header>
 
 <div class="divider"></div>
