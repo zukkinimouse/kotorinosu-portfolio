@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ことりの巣 — 仙台のWeb制作</title>
+<meta name="description" content="仙台の個人店舗・飲食店向けWebサイト制作。だれにとっても、やさしい場所をつくります。">
+<meta name="keywords" content="Web制作, 仙台, ホームページ制作, 飲食店, 個人店舗, ことりの巣">
+<meta property="og:title" content="ことりの巣 — 仙台のWeb制作">
+<meta property="og:description" content="仙台の個人店舗・飲食店向けWebサイト制作。だれにとっても、やさしい場所をつくります。">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #fdfaf5; /* 暗くならないよう明るめに調整 */
+    --brown: #6b4f3a;
+    --light-brown: #a07855;
+    --sage: #8a9e7b;
+    --text: #3d2e22;
+    --text-light: #8b7355;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--warm-white);
+    color: var(--text);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    color-scheme: light; /* ダークモード強制防止 */
+  }
+
+  /* 背景のテクスチャ（暗くなりすぎないよう透明度を 0.04 に調整） */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04; 
+  }
+
+  /* ―― ヘッダーとロゴ ―― */
+  header {
+    padding: 60px 48px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .bird-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .site-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--brown);
+    line-height: 1;
+  }
+
+  .site-subtitle {
+    margin-left: 75px; /* ロゴの幅に合わせて字下げ */
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--text-light);
+    text-transform: uppercase;
+  }
+
+  .divider {
+    max-width: 1200px;
+    height: 1px;
+    background: var(--light-brown);
+    margin: 24px auto 40px;
+    opacity: 0.3;
+    width: calc(100% - 96px); /* 左右の余白確保 */
+  }
+
+  /* ―― 作品ギャラリー（Gridレイアウト） ―― */
+  .gallery {
+    padding: 0 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    /* 画面幅に合わせて自動で列数を調整する魔法のコード */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    align-items: start;
+  }
+
+  /* ―― カード（作品タイル） ―― */
+  .card {
+    background: var(--cream);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.6s ease both;
+    border: 1px solid rgba(160, 120, 85, 0.1);
+  }
+
+  /* フワッと表示させるアニメーション */
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(107, 79, 58, 0.1);
+  }
+
+  .card-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    position: relative;
+  }
+
+  .card-thumb.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-thumb.placeholder svg { opacity: 0.2; }
+  .card-thumb.tall { aspect-ratio: 3/4; }
+  .card-thumb.wide { aspect-ratio: 16/9; }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(61, 46, 34, 0.7) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+  .card:hover .card-overlay { opacity: 1; }
+
+  .card-overlay-text {
+    color: white;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+  }
+
+  .card-info {
+    padding: 16px 20px 20px;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 0.02em;
+  }
+
+  .card-meta {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .card-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border: 1px solid var(--light-brown);
+    border-radius: 20px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: var(--light-brown);
+    text-transform: uppercase;
+  }
+
+  /* ―― UI装飾 ―― */
+  .add-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 56px;
+    height: 56px;
+    background: var(--brown);
+    color: var(--cream);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(107, 79, 58, 0.25);
+    transition: transform 0.2s, background 0.2s;
+    z-index: 10;
+  }
+  .add-btn:hover {
+    background: var(--sage);
+    transform: scale(1.08);
+  }
+
+  .deco-line {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100vh;
+    background: linear-gradient(to bottom, var(--sage), var(--light-brown), transparent);
+    opacity: 0.2;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  /* ―― ヒーローセクション ―― */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+  }
+
+  .hero-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--text);
+    letter-spacing: 0.04em;
+  }
+
+  .hero-copy em {
+    font-style: italic;
+    color: var(--brown);
+  }
+
+  .hero-desc {
+    margin-top: 16px;
+    font-size: 0.82rem;
+    line-height: 1.9;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    max-width: 480px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 12px 28px;
+    background: var(--brown);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .hero-cta:hover {
+    background: var(--sage);
+    transform: translateY(-2px);
+  }
+
+  .hero-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.5;
+  }
+
+  .hero-badge-line {
+    width: 1px;
+    height: 60px;
+    background: var(--light-brown);
+  }
+
+  .hero-badge-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--text-light);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* ―― 準備中カード ―― */
+  .card-coming {
+    opacity: 0.6;
+    cursor: default;
+  }
+  .card-coming:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .coming-label {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border: 1px dashed var(--text-light);
+    border-radius: 20px;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: var(--text-light);
+  }
+
+  /* ―― フッター ―― */
+  footer {
+    border-top: 1px solid rgba(160, 120, 85, 0.2);
+    padding: 48px 48px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--brown);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-contact {
+    text-align: right;
+  }
+
+  .footer-contact-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .footer-contact-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--brown);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    padding: 8px 20px;
+    border: 1px solid rgba(107, 79, 58, 0.3);
+    border-radius: 2px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .footer-contact-link:hover {
+    background: var(--cream);
+    border-color: var(--brown);
+  }
+
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+    font-size: 0.65rem;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+    margin-top: 8px;
+  }
+
+  /* ―― セクションラベル ―― */
+  .section-label {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 0 48px;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--light-brown);
+    opacity: 0.3;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 40px 24px 20px; }
+    .site-subtitle { margin-left: 0; margin-top: 15px; }
+    .gallery { padding: 0 24px 60px; gap: 20px; }
+    .divider { width: calc(100% - 48px); }
+    .hero { padding: 0 24px; grid-template-columns: 1fr; }
+    .hero-badge { display: none; }
+    .section-label { padding: 0 24px; }
+    footer { padding: 40px 24px 48px; flex-direction: column; align-items: flex-start; }
+    .footer-contact { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deco-line"></div>
+
+<header>
+  <div class="logo-area">
+    <svg class="bird-logo" viewBox="0 0 100 100">
+      <path d="M 15 75 Q 50 95 85 70" fill="none" stroke="#a07855" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 35 65 C 30 45, 50 35, 60 45 C 65 40, 75 40, 70 50 C 75 55, 70 65, 60 65 C 50 70, 40 70, 35 65 Z" fill="#8a9e7b" opacity="0.9"/>
+      <circle cx="58" cy="48" r="1.5" fill="#f5f0e8"/>
+    </svg>
+    <h1 class="site-title">ことりの巣</h1>
+  </div>
+  <p class="site-subtitle">だれにとっても、やさしい場所</p>
+</header>
+
+<div class="divider"></div>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-copy">
+      仙台の<em>小さなお店</em>に、<br>
+      あたたかいWebを。
+    </p>
+    <p class="hero-desc">
+      飲食店・個人店舗のホームページ制作をしています。<br>
+      デザインからコーディングまで、ひとりで丁寧に。<br>
+      仙台・宮城を中心に承っています。
+    </p>
+    <a href="#contact" class="hero-cta">お問い合わせ</a>
+  </div>
+  <div class="hero-badge">
+    <div class="hero-badge-line"></div>
+    <span class="hero-badge-text">Sendai — Web Design</span>
+  </div>
+</section>
+
+<p class="section-label">Works</p>
+
+<main class="gallery">
+
+  <!-- 蔵の庄 -->
+  <article class="card" onclick="window.open('https://zukkinimouse.github.io/kuranosyo-/', '_blank')" style="cursor:pointer;">
+    <div class="card-thumb">
+      <img src="kuranoshohero.png" alt="蔵の庄 ランディングページ" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+      <div class="card-overlay"><span class="card-overlay-text">→ サイトを見る</span></div>
+    </div>
+    <div class="card-info">
+      <h2 class="card-title">自作デモ｜蔵の庄</h2>
+      <p class="card-meta">2026 — LP / Mini Game / Contact</p>
+      <span class="card-tag">HTML / CSS</span>
+      <span class="card-tag">JavaScript</span>
+      <span class="card-tag">Canvas API</span>
+    </div>
+  </article>
+
+  <!-- 麺処 杜の雫 -->
+  <article class="card" onclick="window.open('https://zukkinimouse.github.io/morino_shizuku/', '_blank')" style="cursor:pointer;">
+    <div class="card-thumb" style="aspect-ratio:4/3;">
+      <img src="morinoshizukuhero.png" alt="麺処 杜の雫 ランディングページ" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+      <div class="card-overlay"><span class="card-overlay-text">→ サイトを見る</span></div>
+    </div>
+    <div class="card-info">
+      <h2 class="card-title">自作デモ｜麺処 杜の雫</h2>
+      <p class="card-meta">2026 — LP / 空席管理 / LINE予約 / Firebase</p>
+      <span class="card-tag">HTML / CSS</span>
+      <span class="card-tag">JavaScript</span>
+      <span class="card-tag">Firebase</span>
+    </div>
+  </article>
+
+  <!-- Hair Salon Mori -->
+  <article class="card" style="cursor:pointer;" onclick="window.open('https://zukkinimouse.github.io/hair-salon-Mori/', '_blank')">
+    <div class="card-thumb" style="aspect-ratio:4/3;">
+      <img src="morihero.png" alt="Hair Salon Mori" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+      <div class="card-overlay"><span class="card-overlay-text">→ サイトを見る</span></div>
+    </div>
+    <div class="card-info">
+      <h2 class="card-title">自作デモ｜Hair Salon Mori</h2>
+      <p class="card-meta">2026 — LP / 予約 / スタイリスト / ギャラリー</p>
+      <span class="card-tag">HTML / CSS</span>
+      <span class="card-tag">JavaScript</span>
+    </div>
+  </article>
+
+  
+  <!-- 準備中 -->
+  <article class="card card-coming">
+    <div class="card-thumb placeholder" style="background:#dde4d9;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a07855" stroke-width="1.2">
+        <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+      </svg>
+      <div class="card-overlay"></div>
+    </div>
+    <div class="card-info">
+      <h2 class="card-title" style="color:var(--text-light);">次の制作物</h2>
+      <p class="card-meta">Coming Soon</p>
+      <span class="coming-label">準備中</span>
+    </div>
+  </article>
+
+</main>
+
+<p class="section-label" style="margin-top: 60px;">Technology & Systems</p>
+
+<section class="gallery" style="margin-bottom: 0;">
+
+  <!-- 国分町レーダー -->
+  <article class="card" style="cursor:pointer;" onclick=onclick="window.open('https://zukkinimouse.github.io/kokubuncho-radar/', '_blank')">
+    <div class="card-thumb" style="aspect-ratio:4/3; background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;">
+      <span style="font-size:36px;">🍻</span>
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:#a07855; letter-spacing:0.1em;">国分町レーダー</span>
+      <div class="card-overlay"><span class="card-overlay-text">→ サイトを見る</span></div>
+    </div>
+    <div class="card-info">
+      <h2 class="card-title">国分町 空席レーダー</h2>
+      <p class="card-meta">2026 — リアルタイム空席通知 / LINE Bot / SaaS</p>
+      <span class="card-tag">Firebase</span>
+      <span class="card-tag">JavaScript</span>
+      <span class="card-tag">LINE API</span>
+      <span class="card-tag">Geolocation</span>
+    </div>
+  </article>
+
+  <!-- ShiftBoard -->
+  <article class="card" style="cursor:pointer;">
+    <div class="card-thumb" style="aspect-ratio:4/3;">
+      <img src="shiftboardhero.png" alt="ShiftBoard" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+      <div class="card-overlay"><span class="card-overlay-text">→ サイトを見る</span></div>
+    </div>
+    <div class="card-info">
+      <h2 class="card-title">ShiftBoard</h2>
+      <p class="card-meta">2026 — シフト管理 / ドラッグ&ドロップ / リアルタイム同期</p>
+      <span class="card-tag">React</span>
+      <span class="card-tag">Supabase</span>
+      <span class="card-tag">Vercel</span>
+    </div>
+  </article>
+
+</section>
+
+<footer id="contact">
+  <div class="footer-logo">ことりの巣</div>
+  <div class="footer-contact">
+    <p class="footer-contact-label">Contact</p>
+    <a href="contact.html" class="footer-contact-link">お問い合わせはこちら</a>
+  </div>
+  <p class="footer-copy">© 2026 ことりの巣 — Sendai, Miyagi</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>料金・サービス — ことりの巣</title>
+<meta name="description" content="ことりの巣のサービス料金一覧。仙台の飲食店・個人店舗向けWeb制作・DX支援の料金体系をご案内します。">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #fdfaf5;
+    --brown: #6b4f3a;
+    --light-brown: #a07855;
+    --sage: #8a9e7b;
+    --text: #3d2e22;
+    --text-light: #8b7355;
+    --border: rgba(160, 120, 85, 0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--warm-white);
+    color: var(--text);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.04;
+  }
+
+  .deco-line {
+    position: fixed;
+    top: 0; right: 0;
+    width: 4px; height: 100vh;
+    background: linear-gradient(to bottom, var(--sage), var(--light-brown), transparent);
+    opacity: 0.2;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  /* ヘッダー */
+  header {
+    padding: 60px 48px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+
+  .bird-logo { width: 48px; height: 48px; }
+
+  .site-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--brown);
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-top: 6px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--brown); }
+
+  .divider {
+    max-width: 900px;
+    height: 1px;
+    background: var(--light-brown);
+    margin: 24px auto 56px;
+    opacity: 0.3;
+    width: calc(100% - 96px);
+  }
+
+  /* メインコンテンツ */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 48px 80px;
+  }
+
+  /* ページタイトル */
+  .page-heading {
+    margin-bottom: 64px;
+  }
+
+  .page-heading h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .page-heading h1 em {
+    font-style: italic;
+  }
+
+  .page-heading p {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    line-height: 2;
+  }
+
+  /* セクションラベル */
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.35em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0.7;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .section { margin-bottom: 72px; }
+
+  /* 単品カード */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .menu-card {
+    background: var(--warm-white);
+    padding: 28px 24px;
+    transition: background 0.2s;
+  }
+  .menu-card:hover {
+    background: var(--cream);
+  }
+
+  .menu-card-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    color: var(--sage);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .menu-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--brown);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .menu-card-desc {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 1.9;
+    margin-bottom: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .menu-card-price {
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+
+  .price-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--brown);
+    letter-spacing: 0.02em;
+  }
+
+  .price-sub {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+
+  /* パッケージ */
+  .package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .package-grid { grid-template-columns: 1fr; }
+  }
+
+  .package {
+    background: var(--warm-white);
+    padding: 32px 24px;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .package:hover { background: var(--cream); }
+
+  .package.recommended {
+    background: var(--brown);
+    color: var(--cream);
+  }
+  .package.recommended:hover { background: #7a5c45; }
+
+  .package-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--sage);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .package.recommended .package-badge { color: var(--sage); }
+
+  .package-plan {
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .package.recommended .package-plan { color: rgba(245,240,232,0.5); }
+
+  .package-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+  }
+  .package.recommended .package-name { color: var(--cream); }
+
+  .package-price-area {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    margin-bottom: 20px;
+  }
+  .package.recommended .package-price-area {
+    border-color: rgba(245,240,232,0.15);
+  }
+
+  .package-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--brown);
+    letter-spacing: 0.02em;
+  }
+  .package.recommended .package-price { color: var(--cream); }
+
+  .package-monthly {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+  .package.recommended .package-monthly { color: rgba(245,240,232,0.6); }
+
+  .package-features {
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 2.2;
+    letter-spacing: 0.04em;
+  }
+  .package.recommended .package-features { color: rgba(245,240,232,0.7); }
+
+  .package-features li::before {
+    content: '— ';
+    color: var(--sage);
+    opacity: 0.7;
+  }
+
+  /* オプション */
+  .option-list {
+    border-top: 1px solid var(--border);
+  }
+
+  .option-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .option-name {
+    font-size: 0.82rem;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    font-weight: 400;
+    padding-top: 2px;
+  }
+
+  .option-desc {
+    font-size: 0.74rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    letter-spacing: 0.04em;
+  }
+
+  .option-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--brown);
+    white-space: nowrap;
+    text-align: right;
+    letter-spacing: 0.02em;
+  }
+
+  /* 注記 */
+  .notes {
+    margin-top: 56px;
+    padding: 28px 32px;
+    background: var(--cream);
+    border-left: 2px solid rgba(160, 120, 85, 0.4);
+  }
+
+  .notes-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.7;
+  }
+
+  .notes ul {
+    list-style: none;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    line-height: 2.2;
+    letter-spacing: 0.04em;
+  }
+
+  .notes ul li::before {
+    content: '※ ';
+    color: var(--light-brown);
+    opacity: 0.7;
+  }
+
+  /* CTA */
+  .cta {
+    margin-top: 56px;
+    text-align: center;
+    padding: 48px;
+    border: 1px solid var(--border);
+  }
+
+  .cta-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .cta-sub {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 28px;
+    line-height: 1.9;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    background: var(--brown);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover {
+    background: var(--sage);
+    transform: translateY(-1px);
+  }
+
+  /* フッター */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-copy {
+    font-size: 0.65rem;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 680px) {
+    header { padding: 40px 24px 20px; }
+    .divider { width: calc(100% - 48px); }
+    main { padding: 0 24px 60px; }
+    .option-row { grid-template-columns: 1fr; gap: 6px; }
+    .option-price { text-align: left; }
+    footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deco-line"></div>
+
+<header>
+  <div class="logo-area">
+    <svg class="bird-logo" viewBox="0 0 100 100">
+      <path d="M 15 75 Q 50 95 85 70" fill="none" stroke="#a07855" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 35 65 C 30 45, 50 35, 60 45 C 65 40, 75 40, 70 50 C 75 55, 70 65, 60 65 C 50 70, 40 70, 35 65 Z" fill="#8a9e7b" opacity="0.9"/>
+      <circle cx="58" cy="48" r="1.5" fill="#f5f0e8"/>
+    </svg>
+    <a href="index.html" class="site-title">ことりの巣</a>
+  </div>
+  <a href="index.html" class="back-link">← Works に戻る</a>
+</header>
+
+<div class="divider"></div>
+
+<main>
+
+  <div class="page-heading">
+    <h1>料金・<em>サービス案内</em></h1>
+    <p>
+      仙台・宮城の飲食店・個人店舗向けに、必要な機能だけをシンプルにご提供します。<br>
+      単品でのご依頼も、まとめてのご相談もお気軽にどうぞ。
+    </p>
+  </div>
+
+  <!-- 単品サービス -->
+  <div class="section">
+    <div class="section-label">単品サービス</div>
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <div class="menu-card-tag">集客</div>
+        <div class="menu-card-name">LP 制作</div>
+        <div class="menu-card-desc">お店の魅力を伝えるランディングページ。スマホ対応・GoogleMap連携・SNSリンク込み。</div>
+        <div class="menu-card-price">
+          <div class="price-main">¥30,000 〜</div>
+          <div class="price-sub">保守 ¥5,000 / 月</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-tag">集客</div>
+        <div class="menu-card-name">SNS 動画自動生成</div>
+        <div class="menu-card-desc">Reels・Shorts向け縦型プロモーション動画を自動生成。定期投稿の素材づくりを効率化。</div>
+        <div class="menu-card-price">
+          <div class="price-main">¥20,000 〜</div>
+          <div class="price-sub">月次更新 ¥3,000 / 月</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-tag">予約・来客</div>
+        <div class="menu-card-name">リアルタイム空席通知</div>
+        <div class="menu-card-desc">空席状況をリアルタイムで管理・公開。LINEからの問い合わせ・予約導線を設置。</div>
+        <div class="menu-card-price">
+          <div class="price-main">¥30,000 〜</div>
+          <div class="price-sub">運用費 ¥5,000 / 月</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-tag">予約・来客</div>
+        <div class="menu-card-name">LINE 予約導線</div>
+        <div class="menu-card-desc">LINE公式アカウントと連携した予約受付フロー。自動返信・確認メッセージ設定込み。</div>
+        <div class="menu-card-price">
+          <div class="price-main">¥15,000 〜</div>
+          <div class="price-sub">保守 ¥3,000 / 月</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-tag">店舗運営</div>
+        <div class="menu-card-name">在庫管理</div>
+        <div class="menu-card-desc">食材・消耗品の在庫をスマホで管理。残量が減るとLINEで通知。Excelからの脱却に。</div>
+        <div class="menu-card-price">
+          <div class="price-main">¥20,000 〜</div>
+          <div class="price-sub">保守 ¥3,000 / 月</div>
+        </div>
+      </div>
+
+      <div class="menu-card">
+        <div class="menu-card-tag">店舗運営</div>
+        <div class="menu-card-name">シフト管理</div>
+        <div class="menu-card-desc">希望収集〜確定〜共有をアプリで一元管理。スタッフへのLINE通知連携にも対応。</div>
+        <div class="menu-card-price">
+          <div class="price-main">¥20,000 〜</div>
+          <div class="price-sub">保守 ¥3,000 / 月</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- パッケージ -->
+  <div class="section">
+    <div class="section-label">まとめてお得なパッケージ</div>
+    <div class="package-grid">
+
+      <div class="package">
+        <div class="package-plan">Plan A</div>
+        <div class="package-name">スタートプラン</div>
+        <div class="package-price-area">
+          <div class="package-price">¥35,000</div>
+          <div class="package-monthly">保守 ¥6,000 / 月</div>
+        </div>
+        <ul class="package-features">
+          <li>LP制作</li>
+          <li>GoogleMap連携</li>
+          <li>LINE予約導線</li>
+        </ul>
+      </div>
+
+      <div class="package recommended">
+        <div class="package-badge">人気プラン</div>
+        <div class="package-plan">Plan B</div>
+        <div class="package-name">集客＋運営プラン</div>
+        <div class="package-price-area">
+          <div class="package-price">¥70,000</div>
+          <div class="package-monthly">保守 ¥10,000 / 月</div>
+        </div>
+        <ul class="package-features">
+          <li>LP制作</li>
+          <li>SNS動画自動生成</li>
+          <li>空席通知 / LINE予約</li>
+          <li>在庫管理</li>
+        </ul>
+      </div>
+
+      <div class="package">
+        <div class="package-plan">Plan C</div>
+        <div class="package-name">フル DX プラン</div>
+        <div class="package-price-area">
+          <div class="package-price">¥110,000</div>
+          <div class="package-monthly">保守 ¥15,000 / 月</div>
+        </div>
+        <ul class="package-features">
+          <li>全サービス込み</li>
+          <li>在庫 ＋ 原価管理</li>
+          <li>シフト管理</li>
+          <li>優先サポート</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- オプション -->
+  <div class="section">
+    <div class="section-label">オプション</div>
+    <div class="option-list">
+
+      <div class="option-row">
+        <div class="option-name">撮影手配</div>
+        <div class="option-desc">提携カメラマンによる料理・店内撮影。LP用写真素材として提供します。</div>
+        <div class="option-price">¥20,000 〜</div>
+      </div>
+
+      <div class="option-row">
+        <div class="option-name">原価・ロス管理</div>
+        <div class="option-desc">メニューごとの食材使用量を登録し、原価率・廃棄ロスをリアルタイムで可視化。</div>
+        <div class="option-price">¥30,000 〜</div>
+      </div>
+
+      <div class="option-row">
+        <div class="option-name">多言語対応</div>
+        <div class="option-desc">LP・LINEメッセージの英語・中国語対応。インバウンド集客の強化に。</div>
+        <div class="option-price">¥10,000 〜</div>
+      </div>
+
+      <div class="option-row">
+        <div class="option-name">Googleビジネス最適化</div>
+        <div class="option-desc">Googleマップの表示改善・口コミ返信テンプレートの作成。</div>
+        <div class="option-price">¥10,000</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 注記 -->
+  <div class="notes">
+    <div class="notes-label">Notes</div>
+    <ul>
+      <li>料金はすべて税抜き表示です。</li>
+      <li>お店の規模・ご要望により金額が変わる場合があります。まずはご相談ください。</li>
+      <li>写真素材はご用意いただくか、撮影オプションをご利用ください。</li>
+      <li>保守費用には軽微な修正・テキスト変更・サポート対応が含まれます。</li>
+    </ul>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-text">まずはお気軽にご相談ください。</div>
+    <div class="cta-sub">
+      どのプランが合っているか分からない場合も、<br>
+      打ち合わせの中で一緒に考えます。
+    </div>
+    <a href="contact.html" class="cta-btn">お問い合わせ</a>
+  </div>
+
+</main>
+
+<footer>
+  <p class="footer-copy">© 2026 ことりの巣 — Sendai, Miyagi</p>
+</footer>
+
+</body>
+</html>
